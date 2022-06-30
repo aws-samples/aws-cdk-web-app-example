@@ -1,0 +1,29 @@
+{
+  "name": "web-app",
+  "version": "0.1.0",
+  "bin": {
+    "web-app": "bin/web-app.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "sec-test" : "cdk synth -q && npm audit",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.0",
+    "@types/node": "10.17.27",
+    "@types/prettier": "2.6.0",
+    "aws-cdk": "2.25.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.25.0",
+    "cdk-nag": "^2.14.17",
+    "constructs": "^10.0.0"
+  }
+}

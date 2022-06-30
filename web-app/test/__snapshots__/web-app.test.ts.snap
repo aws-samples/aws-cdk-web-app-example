@@ -1,0 +1,778 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Web App Stack matches the the snapshot 1`] = `
+Object {
+  "Outputs": Object {
+    "Hostname": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "MyALB911A8556",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel510x8664C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/al2022-ami-kernel-5.10-x86_64",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+    },
+  },
+  "Resources": Object {
+    "MyALB911A8556": Object {
+      "DependsOn": Array [
+        "MyVPCPublicSubnet1DefaultRouteAF81AA9B",
+        "MyVPCPublicSubnet2DefaultRoute24460202",
+      ],
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-ELB2",
+              "reason": "For brevity, this non-production example stack shall not enable load balancer access logs.",
+            },
+            Object {
+              "id": "AwsSolutions-EC23",
+              "reason": "The security group is expected to allow unrestricted inbound access, as it represents a public web application.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [
+          Object {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "MyALBSecurityGroupF26FC01F",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": Array [
+          Object {
+            "Ref": "MyVPCPublicSubnet1Subnet0C75866A",
+          },
+          Object {
+            "Ref": "MyVPCPublicSubnet2Subnet4DDFF14C",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "MyALBHttpListenerCA3CD78E": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-EC23",
+              "reason": "The security group is expected to allow unrestricted inbound access, as it represents a public web application.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
+              "Ref": "MyALBHttpListenerTargetsGroupAC6A6762",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": Object {
+          "Ref": "MyALB911A8556",
+        },
+        "Port": 80,
+        "Protocol": "HTTP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "MyALBHttpListenerTargetsGroupAC6A6762": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-EC23",
+              "reason": "The security group is expected to allow unrestricted inbound access, as it represents a public web application.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": Array [
+          Object {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "instance",
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "MyALBSecurityGroupF26FC01F": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-EC23",
+              "reason": "The security group is expected to allow unrestricted inbound access, as it represents a public web application.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "GroupDescription": "Automatically created Security Group for ELB WebAppStackMyALB4317CD35",
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow from anyone on port 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "MyALBSecurityGrouptoWebAppStackMyASGInstanceSecurityGroup5108967980F4D3BE2C": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-EC23",
+              "reason": "The security group is expected to allow unrestricted inbound access, as it represents a public web application.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "MyASGInstanceSecurityGroupBF55119F",
+            "GroupId",
+          ],
+        },
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "MyALBSecurityGroupF26FC01F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "MyASG63588E97": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-AS3",
+              "reason": "For brevity, this non-production example stack shall not configure scaling notifications.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "LaunchConfigurationName": Object {
+          "Ref": "MyASGLaunchConfig075E9F95",
+        },
+        "MaxSize": "2",
+        "MinSize": "2",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "PropagateAtLaunch": true,
+            "Value": "WebAppStack/MyASG",
+          },
+        ],
+        "TargetGroupARNs": Array [
+          Object {
+            "Ref": "MyALBHttpListenerTargetsGroupAC6A6762",
+          },
+        ],
+        "VPCZoneIdentifier": Array [
+          Object {
+            "Ref": "MyVPCPrivateSubnet1Subnet641543F4",
+          },
+          Object {
+            "Ref": "MyVPCPrivateSubnet2SubnetA420D3F0",
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "UpdatePolicy": Object {
+        "AutoScalingScheduledAction": Object {
+          "IgnoreUnmodifiedGroupSizeProperties": true,
+        },
+      },
+    },
+    "MyASGInstanceProfile2A2CDB5D": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "MyASGInstanceRoleE40FF11D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "MyASGInstanceRoleE40FF11D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "ec2.",
+                      Object {
+                        "Ref": "AWS::URLSuffix",
+                      },
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyASG",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "MyASGInstanceSecurityGroupBF55119F": Object {
+      "Properties": Object {
+        "GroupDescription": "WebAppStack/MyASG/InstanceSecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyASG",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "MyASGInstanceSecurityGroupfromWebAppStackMyALBSecurityGroupEE1D04C2800FC78107": Object {
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "MyASGInstanceSecurityGroupBF55119F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "MyALBSecurityGroupF26FC01F",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "MyASGLaunchConfig075E9F95": Object {
+      "DependsOn": Array [
+        "MyASGInstanceRoleE40FF11D",
+      ],
+      "Properties": Object {
+        "IamInstanceProfile": Object {
+          "Ref": "MyASGInstanceProfile2A2CDB5D",
+        },
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel510x8664C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "t3.micro",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "MyASGInstanceSecurityGroupBF55119F",
+              "GroupId",
+            ],
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": "#!/bin/bash
+#!/bin/bash -xe
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+usermod -a -G apache ec2-user
+chown -R ec2-user:apache /var/www
+chmod 2775 /var/www
+find /var/www -type d -exec chmod 2775 {} \\\\;
+find /var/www -type f -exec chmod 0664 {} \\\\;
+echo '<html><head><title>Hello World!</title></head><body><p>Hello World!</p></body></html>' > /var/www/html/index.html",
+        },
+      },
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+    },
+    "MyVPCAFB07A31": Object {
+      "Metadata": Object {
+        "cdk_nag": Object {
+          "rules_to_suppress": Array [
+            Object {
+              "id": "AwsSolutions-VPC7",
+              "reason": "For brevity, this non-production example stack shall not configure a VPC flow log.",
+            },
+          ],
+        },
+      },
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "MyVPCIGW30AB6DD6": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "MyVPCPrivateSubnet1DefaultRouteA8EE6636": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "MyVPCPublicSubnet1NATGateway838228A5",
+        },
+        "RouteTableId": Object {
+          "Ref": "MyVPCPrivateSubnet1RouteTable133BD901",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "MyVPCPrivateSubnet1RouteTable133BD901": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "MyVPCPrivateSubnet1RouteTableAssociation85DFBFBB": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "MyVPCPrivateSubnet1RouteTable133BD901",
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPrivateSubnet1Subnet641543F4",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "MyVPCPrivateSubnet1Subnet641543F4": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "MyVPCPrivateSubnet2DefaultRoute37F90B5D": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "MyVPCPublicSubnet2NATGateway4D6E78B8",
+        },
+        "RouteTableId": Object {
+          "Ref": "MyVPCPrivateSubnet2RouteTableDF3CB76C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "MyVPCPrivateSubnet2RouteTableAssociationC373B6FE": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "MyVPCPrivateSubnet2RouteTableDF3CB76C",
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPrivateSubnet2SubnetA420D3F0",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "MyVPCPrivateSubnet2RouteTableDF3CB76C": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "MyVPCPrivateSubnet2SubnetA420D3F0": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "MyVPCPublicSubnet1DefaultRouteAF81AA9B": Object {
+      "DependsOn": Array [
+        "MyVPCVPCGWE6F260E1",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "MyVPCIGW30AB6DD6",
+        },
+        "RouteTableId": Object {
+          "Ref": "MyVPCPublicSubnet1RouteTable538A9511",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "MyVPCPublicSubnet1EIP5EB6147D": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "MyVPCPublicSubnet1NATGateway838228A5": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "MyVPCPublicSubnet1EIP5EB6147D",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPublicSubnet1Subnet0C75866A",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "MyVPCPublicSubnet1RouteTable538A9511": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "MyVPCPublicSubnet1RouteTableAssociation8A950D8E": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "MyVPCPublicSubnet1RouteTable538A9511",
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPublicSubnet1Subnet0C75866A",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "MyVPCPublicSubnet1Subnet0C75866A": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "MyVPCPublicSubnet2DefaultRoute24460202": Object {
+      "DependsOn": Array [
+        "MyVPCVPCGWE6F260E1",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "MyVPCIGW30AB6DD6",
+        },
+        "RouteTableId": Object {
+          "Ref": "MyVPCPublicSubnet2RouteTableA6A1CD3D",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "MyVPCPublicSubnet2EIP6F364C5D": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "MyVPCPublicSubnet2NATGateway4D6E78B8": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "MyVPCPublicSubnet2EIP6F364C5D",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPublicSubnet2Subnet4DDFF14C",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "MyVPCPublicSubnet2RouteTableA6A1CD3D": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "MyVPCPublicSubnet2RouteTableAssociationF22D63CA": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "MyVPCPublicSubnet2RouteTableA6A1CD3D",
+        },
+        "SubnetId": Object {
+          "Ref": "MyVPCPublicSubnet2Subnet4DDFF14C",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "MyVPCPublicSubnet2Subnet4DDFF14C": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "WebAppStack/MyVPC/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "MyVPCVPCGWE6F260E1": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "MyVPCIGW30AB6DD6",
+        },
+        "VpcId": Object {
+          "Ref": "MyVPCAFB07A31",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
