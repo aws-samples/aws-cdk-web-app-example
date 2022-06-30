@@ -339,6 +339,10 @@ Object {
         "UserData": Object {
           "Fn::Base64": "#!/bin/bash
 #!/bin/bash -xe
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
 yum update -y
 yum install -y httpd
 systemctl start httpd
