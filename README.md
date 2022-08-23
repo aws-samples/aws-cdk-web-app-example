@@ -4,9 +4,15 @@ This is an example of how to build a resilient web application with just 30 line
 
 > **Note:** This example stack is intentionally not production-ready, in order to keep the sample short. Among other improvements, please take note of the suppressions that have been added to the stack for [cdk-nag](https://github.com/cdklabs/cdk-nag/). 
 
+The example is available in the following languages:
+* `web-app` - TypeScript
+* `java-web-app` - Java
+
 ## Deploying the CDK Stack
 
-Set up CDK as described [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html). Then, use the following commands to install all dependencies and deploy the stack in your AWS account:
+Set up CDK as described [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_prerequisites). Then, use the following commands to install dependencies, build and deploy the stack in your AWS account:
+
+### TypeScript
 
 ```
 cd web-app
@@ -15,10 +21,18 @@ npm run build
 cdk deploy
 ```
 
+### Java
+
+```
+cd java-web-app
+mvn package
+cdk deploy
+```
+
 ## Accessing the test page
 
 After deploying, the CDK CLI will return an output called `WebAppStack.Hostname` which is the hostname of the Application Load Balancer. Open this hostname in a web browser (via HTTP) to display the HTML page. Note that immediately after the deployment, you might see an error code of 502 because the instances of Auto Scaling Group have not finished installing the Apache HTTP Server yet. In this case, wait a few minutes and try again.
 
-## Testing the stack
+## Testing the stack (TypeScript)
 
-This repository was scaffolded via `cdk init sample-app --language typescript`. This command also scaffolds a test workflow with [jest](https://jestjs.io/docs/getting-started). The test suite can be run with the command `npm run test`. To keep this example simple, the test suite only employs the method of [snapshot testing](https://docs.aws.amazon.com/cdk/v2/guide/testing.html#testing_snapshot).
+This TypeScript variant was scaffolded via `cdk init sample-app --language typescript`. This command also scaffolds a test workflow with [jest](https://jestjs.io/docs/getting-started). The test suite can be run with the command `npm run test`. To keep this example simple, the test suite only employs the method of [snapshot testing](https://docs.aws.amazon.com/cdk/v2/guide/testing.html#testing_snapshot).

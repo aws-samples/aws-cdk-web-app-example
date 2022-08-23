@@ -18,8 +18,8 @@ Object {
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel510x8664C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "/aws/service/ami-amazon-linux-latest/al2022-ami-kernel-5.10-x86_64",
+    "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel515x8664C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/al2022-ami-kernel-5.15-x86_64",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
     },
   },
@@ -325,7 +325,7 @@ Object {
           "Ref": "MyASGInstanceProfile2A2CDB5D",
         },
         "ImageId": Object {
-          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel510x8664C96584B6F00A464EAD1953AFF4B05118Parameter",
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2022amikernel515x8664C96584B6F00A464EAD1953AFF4B05118Parameter",
         },
         "InstanceType": "t3.micro",
         "SecurityGroups": Array [

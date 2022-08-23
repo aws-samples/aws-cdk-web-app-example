@@ -8,6 +8,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "test-update-snapshot": "jest --updateSnapshot",
     "sec-test" : "cdk synth -q && npm audit",
     "cdk": "cdk"
   },

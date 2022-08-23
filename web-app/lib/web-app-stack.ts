@@ -20,7 +20,9 @@ export class WebAppStack extends Stack {
     const asg = new autoscaling.AutoScalingGroup(this, 'MyASG', {
       vpc: vpc,
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.MICRO),
-      machineImage: ec2.MachineImage.latestAmazonLinux({ generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022 }),
+      // see https://github.com/aws/aws-cdk/issues/21011
+      machineImage: ec2.MachineImage.fromSsmParameter('/aws/service/ami-amazon-linux-latest/al2022-ami-kernel-5.15-x86_64'),
+      // machineImage: ec2.MachineImage.latestAmazonLinux({ generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022 }),
       vpcSubnets: vpc.selectSubnets({ subnetType: ec2.SubnetType.PRIVATE_WITH_NAT }),
       minCapacity: 2
     })
