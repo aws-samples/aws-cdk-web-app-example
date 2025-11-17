@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .product-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-price {
+            color: #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ Product Gallery</h1>
+        <div class="gallery">
+            <div class="product-card">
+                <img src="images/product1.jpg" alt="Product 1" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Wireless Headphones</div>
+                    <div class="product-price">$79.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product2.jpg" alt="Product 2" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Smart Watch</div>
+                    <div class="product-price">$199.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product3.jpg" alt="Product 3" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Laptop Stand</div>
+                    <div class="product-price">$49.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product4.jpg" alt="Product 4" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Mechanical Keyboard</div>
+                    <div class="product-price">$129.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product5.jpg" alt="Product 5" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">USB-C Hub</div>
+                    <div class="product-price">$39.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product6.jpg" alt="Product 6" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Webcam HD</div>
+                    <div class="product-price">$89.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product7.jpg" alt="Product 7" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Desk Lamp</div>
+                    <div class="product-price">$34.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product8.jpg" alt="Product 8" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Wireless Mouse</div>
+                    <div class="product-price">$29.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product9.jpg" alt="Product 9" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Phone Stand</div>
+                    <div class="product-price">$19.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/product10.jpg" alt="Product 10" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Cable Organizer</div>
+                    <div class="product-price">$14.99</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
